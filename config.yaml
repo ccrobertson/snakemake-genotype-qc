@@ -1,0 +1,2 @@
+donor_phenotypes: /cluster/ifs/projects/collins/users/robertsoncc/islet_genotype_merge/data/donor_meta_data.txt
+plink_bfile: /cluster/ifs/projects/collins/users/robertsoncc/islet_genotype_merge/results/merged_pass_geno_hwe
