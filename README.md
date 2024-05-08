@@ -1,9 +1,10 @@
 ### Set up the configs
 This is a pipeline to perform preliminary QC on array-based genotyping. It takes a config file "config.yaml" which specifies input files. The config.yaml file included in this repos is just an example.
-Running it on an HPC requires Snakemake7 or earlier with job submission parameters defined in "config_cluster.yaml".
 
 ### Set up the software environment
-I plan to create a docker image for this pipeline, but for now you'll have to just make sure the dependencies are available in your work environment.
+Running this pipeline requires Snakemake7 or earlier with slurm job submission parameters defined in "config_cluster.yaml".
+
+I plan to create a docker image for this pipeline, but for now you'll have to just make sure the dependencies are available in your local work environment.
 Running this pipeline requires a few software programs which can be downloaded as binary files and placed in one of the directories referenced in your PATH:
 * plink1.9 (https://www.cog-genomics.org/plink/)
 * plink2 (https://www.cog-genomics.org/plink/2.0/)
