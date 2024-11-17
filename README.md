@@ -17,6 +17,7 @@ bash download_king_reference_files.sh
 
 ### Run snakemake pipeline
 ```
+# Load singularity and snakemake7 (current on great lakes as of 2024-11-16)
 module load openjdk/18.0.1.1
 module load singularity/4.1.3
 module load snakemake/7.32.4
