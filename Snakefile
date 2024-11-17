@@ -12,15 +12,17 @@
 #
 ################################################
 configfile: "config.yaml"
+container: "docker://ccrober/r-genotype-qc:latest"
 
 rule all:
-    input: 
-        "results/tmp_XY.sexcheck",
-        "results/kingpcapc.txt",
-        "results/kingsvm_InferredAncestry.txt",
-        "results/kingrel.kin",
-        "results/geno_qc_summary.txt",
-        "results/geno_qc_plots.pdf",
+    input:
+        #"results/full.bed", 
+        #"results/tmp_XY.sexcheck",
+        #"results/kingpcapc.txt",
+        #"results/kingsvm_InferredAncestry.txt",
+        #"results/kingrel.kin",
+        #"results/geno_qc_summary.txt",
+        #"results/geno_qc_plots.pdf",
         "results/clean.bed"
         
 
@@ -30,7 +32,7 @@ rule sort_chr:
     output:
         "results/full.bed"
     params:
-        prefix = config["plink_bfile"], 
+        prefix = config["plink_bfile"],
     shell:
         """
         plink1.9 --bfile {params.prefix} --allow-extra-chr --make-bed --out results/full
@@ -78,8 +80,6 @@ rule ancestry_svm:
         popref = "results/kingpca_popref.txt"
     output:
         "results/kingsvm_InferredAncestry.txt"
-    conda:
-        "renv"
     shell:
         """
         Rscript scripts/Ancestry_Inference.R {input.pcs} {input.popref} results/kingsvm
@@ -102,14 +102,13 @@ rule summary:
         missing_qc = "results/tmp.smiss",
         sex_qc = "results/tmp_XY.sexcheck",
         ancestry_qc = "results/kingsvm_InferredAncestry.txt",
+        rel_qc = "results/kingrel.kin",
     output:
         "results/geno_qc_summary.txt",
         "results/geno_qc_plots.pdf",
         "results/sex_update.txt",
         "results/duplicates_to_drop.txt",
         "results/duplicates_to_update.txt",
-    conda:
-        "rtidy"
     script: "scripts/qc_summary.R"
 
 rule clean:

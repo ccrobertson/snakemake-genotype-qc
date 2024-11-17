@@ -30,7 +30,7 @@ write.table(sample_qc, file = "results/geno_qc_summary.txt", row.names = FALSE, 
 
 ### Check that duplicates are MZ
 duplicated_donors = unique(sample_qc$Donor[duplicated(sample_qc$Donor)])
-related_qc = read.table("results/kingrel.kin", header = TRUE, sep = "\t")
+related_qc = read.table(snakemake@input[["rel_qc"]], header = TRUE, sep = "\t")
 MZ = related_qc[related_qc$InfType == "Dup/MZ", ]
 for (i in 1:length(duplicated_donors)) {
   if (!duplicated_donors[i] %in% c(MZ$ID1, MZ$ID2)) {
