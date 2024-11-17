@@ -1,0 +1,10 @@
+Donor	Age	Sex	BMI	HbA1C	Diagnosis_info	Ancestry_info	Source	Diagnosis
+HG00096E	45	F	21	6	None	NA	Penn	NoHxDiab
+HG00097E	18	M	21	5.1	None	NA	Penn	NoHxDiab
+HG00099E	55	F	32	6.1	None	NA	Penn	NoHxDiab
+HG00100E	44	F	28	6	None	NA	Penn	NoHxDiab
+HG00101E	38	F	24	5.5	None	NA	Penn	NoHxDiab
+HG00102E	17	M	29	6.4	None	NA	Penn	NoHxDiab
+HG00103E	40	M	24	5.2	None	NA	Penn	NoHxDiab
+HG00105E	35	M	32	6	None	NA	Penn	NoHxDiab
+HG00106E	33	M	26	4.4	None	NA	Penn	NoHxDiab
