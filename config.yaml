@@ -1,3 +1,3 @@
-plink_bfile: example_data/example5
+plink_bfile: example_data/example
 donor_meta_data: example_data/example_meta_data.txt
 batch_table: example_data/example_batch_table.txt
