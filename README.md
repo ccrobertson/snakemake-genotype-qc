@@ -1,5 +1,6 @@
 ### Set up the configs
-This is a pipeline to perform preliminary QC on array-based genotyping. It takes a config file "config.yaml" which specifies input files. The config.yaml file included in this repos is just an example.
+This is a pipeline to perform preliminary QC on array-based genotyping. It required input files to be array-based genotypes aligned to hg19 and in plink v1.9 binary format. 
+Input file paths should be specified in a config file called "config.yaml". An example config file and example input files are provided for reference.
 
 ### Set up the software environment
 This pipeline runs in a containerized environment using singularity. Running it requires Snakemake version 7 (it is not compatible with Snakemake version 8) and singularity to be available in your work environment. 

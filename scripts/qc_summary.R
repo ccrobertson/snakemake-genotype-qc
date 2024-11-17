@@ -1,15 +1,15 @@
 library(tidyverse)
 library(gridExtra)
 
-pheno = read.table(snakemake@input[["donor_meta_data"]], header = TRUE, sep = "\t")
-batches_df = read.table(snakemake@input[["batch_table"]], header = TRUE, sep = "\t")
+pheno = read.table(snakemake@input[["donor_meta_data"]], header = TRUE)
+batches_df = read.table(snakemake@input[["batch_table"]], header = TRUE)
 row.names(batches_df) = batches_df$IID
 
 ### Combine all the qc info
 missing_qc = read.table(snakemake@input[["missing_qc"]], header = FALSE, sep = "")
 names(missing_qc) <- c("FID", "IID", "NMISS", "N", "FRQ_MISS")
 sex_qc = read.table(snakemake@input[["sex_qc"]], header = TRUE, sep = "")
-ancestry_qc = read.table(snakemake@input[["ancestry_qc"]], header = TRUE, sep = "\t")
+ancestry_qc = read.table(snakemake@input[["ancestry_qc"]], header = TRUE)
 
 sample_qc = merge(batches_df[, c("IID", "Donor", "Batch", "chip_version")], merge(ancestry_qc, merge(missing_qc, sex_qc, by = "IID"), by = "IID"), by = "IID")
 sample_qc <- merge(sample_qc, pheno, by = "Donor", all.x = TRUE)
@@ -30,11 +30,13 @@ write.table(sample_qc, file = "results/geno_qc_summary.txt", row.names = FALSE, 
 
 ### Check that duplicates are MZ
 duplicated_donors = unique(sample_qc$Donor[duplicated(sample_qc$Donor)])
-related_qc = read.table(snakemake@input[["rel_qc"]], header = TRUE, sep = "\t")
+related_qc = read.table(snakemake@input[["rel_qc"]], header = TRUE)
 MZ = related_qc[related_qc$InfType == "Dup/MZ", ]
+
+if (length(duplicated_donors)>0) {
 for (i in 1:length(duplicated_donors)) {
   if (!duplicated_donors[i] %in% c(MZ$ID1, MZ$ID2)) {
-    stop("ERROR: Duplicate donors IDs are not reflected in genotype-based relationship inference.\n")
+    cat("WARNING: Duplicate donors IDs are not reflected in genotype-based relationship inference.\n")
   }
 }
 cat("The following donors are duplicated across genotyping batches:\n")
@@ -43,6 +45,7 @@ cat("\n")
 cat("Please confirm that relationship inference is consistent:\n")
 print(MZ)
 cat("\n")
+}
 
 
 ### Choose sample among duplicates

@@ -89,7 +89,7 @@ rule related:
     input: 
         "results/tmp.bed"
     output:
-        "results/kingrel.kin"
+        "results/kingrel.kin0"
     shell:
         """
         king -b {input} --related --prefix "results/kingrel"
@@ -102,7 +102,7 @@ rule summary:
         missing_qc = "results/tmp.smiss",
         sex_qc = "results/tmp_XY.sexcheck",
         ancestry_qc = "results/kingsvm_InferredAncestry.txt",
-        rel_qc = "results/kingrel.kin",
+        rel_qc = "results/kingrel.kin0",
     output:
         "results/geno_qc_summary.txt",
         "results/geno_qc_plots.pdf",
